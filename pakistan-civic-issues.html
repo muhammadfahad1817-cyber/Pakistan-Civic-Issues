@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakistan — Civic Issues & Solutions</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --green: #01411C;
+    --deep-green: #002910;
+    --white: #F5F5F0;
+    --gold: #C9A84C;
+    --red: #c0392b;
+    --teal: #0D7C66;
+    --slate: #1a2332;
+    --glow: #00ff88;
+    --card-bg: rgba(1,65,28,0.13);
+    --border-glow: rgba(201,168,76,0.35);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: #020f07;
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 18px; height: 18px;
+    border: 2px solid var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 99999;
+    transition: transform 0.12s ease, opacity 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    position: fixed; width: 5px; height: 5px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 99999;
+  }
+  body:hover .cursor { opacity: 1; }
+
+  /* STARFIELD CANVAS */
+  #starfield {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .hero-bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbFloat 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(1,65,28,0.55) 0%, transparent 70%); top: -100px; left: -100px; }
+  .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(201,168,76,0.18) 0%, transparent 70%); bottom: -80px; right: -80px; animation-delay: -4s; }
+  .orb3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%); top: 40%; left: 60%; animation-delay: -2s; }
+
+  @keyframes orbFloat {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-30px) scale(1.08); }
+  }
+
+  .flag-ring {
+    position: absolute;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    border: 2px solid rgba(201,168,76,0.2);
+    animation: ringRotate 20s linear infinite;
+    top: 50%; left: 50%; transform: translate(-50%,-50%);
+  }
+  .flag-ring::before {
+    content: '';
+    position: absolute; top: -8px; left: 50%;
+    width: 14px; height: 14px;
+    background: var(--gold); border-radius: 50%;
+    box-shadow: 0 0 15px var(--gold);
+  }
+  .flag-ring-2 {
+    width: 500px; height: 500px;
+    border-color: rgba(1,65,28,0.3);
+    animation: ringRotate 30s linear infinite reverse;
+  }
+
+  @keyframes ringRotate { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .hero-crescent {
+    font-size: 5rem;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 80px rgba(201,168,76,0.3);
+    animation: crescentPulse 3s ease-in-out infinite;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  @keyframes crescentPulse {
+    0%,100% { text-shadow: 0 0 40px rgba(201,168,76,0.6), 0 0 80px rgba(201,168,76,0.3); }
+    50% { text-shadow: 0 0 60px rgba(201,168,76,0.9), 0 0 120px rgba(201,168,76,0.5), 0 0 200px rgba(201,168,76,0.2); }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, #a3d977 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleReveal 1.2s cubic-bezier(0.23,1,0.32,1) both;
+  }
+  @keyframes titleReveal {
+    from { opacity: 0; transform: translateY(60px) scale(0.9); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .hero-sub {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 1rem;
+    animation: fadeUp 1.5s 0.4s both;
+    text-align: center;
+  }
+
+  .hero-desc {
+    max-width: 600px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: rgba(245,245,240,0.7);
+    margin-top: 1.5rem;
+    line-height: 1.7;
+    animation: fadeUp 1.5s 0.7s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-cta {
+    margin-top: 3rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem;
+    animation: fadeUp 1.5s 1s both;
+  }
+  .scroll-cta span { font-size: 0.75rem; letter-spacing: 3px; color: var(--gold); opacity: 0.7; }
+  .scroll-arrow {
+    width: 2px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollArrow 2s ease-in-out infinite;
+  }
+  @keyframes scrollArrow {
+    0%,100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.4; }
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    position: relative; z-index: 2;
+    background: linear-gradient(135deg, rgba(1,65,28,0.4), rgba(201,168,76,0.1));
+    border-top: 1px solid var(--border-glow);
+    border-bottom: 1px solid var(--border-glow);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem 0;
+  }
+  .stat-item {
+    text-align: center;
+    position: relative;
+  }
+  .stat-item::after {
+    content: '';
+    position: absolute; right: 0; top: 10%; height: 80%;
+    width: 1px; background: var(--border-glow);
+  }
+  .stat-item:last-child::after { display: none; }
+  .stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--gold);
+    display: block;
+    counter-reset: stat;
+  }
+  .stat-label {
+    font-size: 0.8rem; letter-spacing: 2px;
+    color: rgba(245,245,240,0.6);
+    text-transform: uppercase; margin-top: 0.25rem;
+  }
+
+  /* SECTION LAYOUT */
+  .section {
+    position: relative; z-index: 2;
+    padding: 8rem 0;
+  }
+  .section-tag {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.65rem; letter-spacing: 5px;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 900; line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { color: var(--gold); font-style: normal; }
+  .section-divider {
+    width: 60px; height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 3rem;
+  }
+
+  /* PROBLEM CARDS - 3D */
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    perspective: 1200px;
+  }
+
+  .problem-card {
+    position: relative;
+    background: linear-gradient(145deg, rgba(1,65,28,0.15), rgba(0,0,0,0.4));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease, border-color 0.3s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    opacity: 0;
+    animation: cardReveal 0.8s ease both;
+  }
+  .problem-card:hover {
+    transform: rotateX(-5deg) rotateY(5deg) translateY(-12px) scale(1.02);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(201,168,76,0.15);
+    border-color: rgba(201,168,76,0.5);
+  }
+  @keyframes cardReveal {
+    from { opacity: 0; transform: translateY(50px) rotateX(15deg); }
+    to { opacity: 1; transform: translateY(0) rotateX(0); }
+  }
+
+  .card-glow-orb {
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+    top: -50px; right: -50px;
+  }
+  .problem-card:hover .card-glow-orb { opacity: 1; }
+
+  .problem-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    filter: drop-shadow(0 0 12px currentColor);
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+  .problem-card:hover .problem-icon { transform: scale(1.2) rotate(-5deg); }
+
+  .problem-severity {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem; letter-spacing: 2px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .severity-critical { background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.5); color: #ff6b6b; }
+  .severity-high { background: rgba(230,126,34,0.2); border: 1px solid rgba(230,126,34,0.5); color: #ffa55e; }
+  .severity-medium { background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.5); color: var(--gold); }
+
+  .problem-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    margin-bottom: 0.75rem; line-height: 1.2;
+  }
+  .problem-desc {
+    font-size: 0.95rem; line-height: 1.7;
+    color: rgba(245,245,240,0.65);
+    margin-bottom: 1.5rem;
+  }
+
+  .problem-stats-mini {
+    display: flex; gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .mini-stat {
+    flex: 1; text-align: center;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px; padding: 0.6rem;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .mini-stat-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem; font-weight: 700; color: var(--gold);
+    display: block;
+  }
+  .mini-stat-key {
+    font-size: 0.65rem; letter-spacing: 1px;
+    color: rgba(245,245,240,0.4);
+    text-transform: uppercase;
+  }
+
+  .expand-btn {
+    width: 100%;
+    background: linear-gradient(135deg, rgba(1,65,28,0.4), rgba(201,168,76,0.1));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px; padding: 0.75rem;
+    color: var(--gold); font-family: 'Orbitron', monospace;
+    font-size: 0.65rem; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .expand-btn:hover { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+  /* SOLUTION MODAL */
+  .solution-panel {
+    display: none;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(0,41,16,0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(0,255,136,0.2);
+    animation: panelSlide 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+  .solution-panel.active { display: block; }
+  @keyframes panelSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .solution-title {
+    font-family: 'Orbitron', monospace; font-size: 0.7rem;
+    letter-spacing: 3px; color: var(--glow);
+    margin-bottom: 1rem; text-transform: uppercase;
+  }
+  .solution-list { list-style: none; }
+  .solution-list li {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem; line-height: 1.6; color: rgba(245,245,240,0.8);
+  }
+  .solution-list li:last-child { border-bottom: none; }
+  .sol-bullet {
+    color: var(--glow); font-size: 0.7rem; margin-top: 0.35rem; flex-shrink: 0;
+  }
+
+  /* PROGRESS BARS SECTION */
+  .crisis-meter-section {
+    position: relative; z-index: 2;
+    background: linear-gradient(180deg, transparent, rgba(1,65,28,0.08), transparent);
+    padding: 6rem 0;
+  }
+  .meter-wrap {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-glow);
+    border-radius: 20px; padding: 2.5rem;
+    backdrop-filter: blur(10px);
+  }
+  .meter-item { margin-bottom: 2rem; }
+  .meter-item:last-child { margin-bottom: 0; }
+  .meter-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .meter-name { font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; }
+  .meter-val {
+    font-family: 'Orbitron', monospace; font-size: 0.85rem; color: var(--gold);
+  }
+  .meter-bar-bg {
+    height: 8px; border-radius: 50px;
+    background: rgba(255,255,255,0.05);
+    overflow: hidden; position: relative;
+  }
+  .meter-bar-fill {
+    height: 100%; border-radius: 50px;
+    width: 0%;
+    transition: width 1.8s cubic-bezier(0.23,1,0.32,1);
+    position: relative;
+  }
+  .meter-bar-fill::after {
+    content: '';
+    position: absolute; right: 0; top: 50%;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: inherit; transform: translateY(-50%);
+    box-shadow: 0 0 12px currentColor;
+  }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 3rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--green), var(--gold), transparent);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+    opacity: 0; transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute; left: -2.85rem; top: 0.3rem;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--green); border: 3px solid var(--gold);
+    box-shadow: 0 0 15px rgba(201,168,76,0.5);
+  }
+  .timeline-year {
+    font-family: 'Orbitron', monospace; font-size: 0.7rem;
+    color: var(--gold); letter-spacing: 2px; margin-bottom: 0.5rem;
+  }
+  .timeline-content h5 {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-content p { font-size: 0.9rem; color: rgba(245,245,240,0.6); line-height: 1.6; }
+
+  /* CALL TO ACTION */
+  .cta-section {
+    position: relative; z-index: 2;
+    padding: 8rem 0; text-align: center;
+    background: radial-gradient(ellipse at center, rgba(1,65,28,0.3) 0%, transparent 70%);
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 1.1rem 2.5rem;
+    background: linear-gradient(135deg, var(--green), var(--teal));
+    border: none; border-radius: 50px;
+    color: white; font-family: 'Orbitron', monospace;
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.4s;
+    box-shadow: 0 10px 40px rgba(1,65,28,0.5);
+    text-decoration: none;
+  }
+  .cta-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(1,65,28,0.7), 0 0 30px rgba(0,255,136,0.2);
+    color: white;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 2;
+    border-top: 1px solid var(--border-glow);
+    padding: 3rem 0;
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+  }
+  .footer-crescent { font-size: 2rem; color: var(--gold); margin-bottom: 0.5rem; }
+  .footer-text { font-size: 0.85rem; color: rgba(245,245,240,0.4); letter-spacing: 2px; }
+
+  /* NAVBAR */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    background: rgba(2,15,7,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    display: flex; align-items: center; justify-content: space-between;
+    transition: all 0.3s;
+  }
+  .navbar.scrolled {
+    background: rgba(2,15,7,0.95);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .nav-brand {
+    font-family: 'Orbitron', monospace; font-size: 1rem;
+    color: var(--gold); letter-spacing: 3px; text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(245,245,240,0.6); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* PARTICLES */
+  .floating-particle {
+    position: fixed;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    pointer-events: none;
+    z-index: 1;
+    animation: particleFloat linear infinite;
+    opacity: 0;
+  }
+  @keyframes particleFloat {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(100px); opacity: 0; }
+  }
+
+  /* NOISE OVERLAY */
+  .noise {
+    position: fixed; inset: 0; z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.4;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .problems-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .flag-ring, .flag-ring-2 { display: none; }
+  }
+
+  /* COUNT UP ANIMATION */
+  .count-up { transition: all 0.1s; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #020f07; }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+  /* SECTION REVEAL */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.23,1,0.32,1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+<div class="noise"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-brand">☪ PAKISTAN</a>
+  <ul class="nav-links">
+    <li><a href="#problems">Issues</a></li>
+    <li><a href="#crisis-meter">Severity</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+  <div class="hero-bg-orb orb3"></div>
+  <div class="flag-ring"></div>
+  <div class="flag-ring flag-ring-2"></div>
+
+  <span class="hero-crescent">☪</span>
+  <h1 class="hero-title">Pakistan's<br>Civic Crisis</h1>
+  <p class="hero-sub">Confronting the Nation's Greatest Challenges</p>
+  <p class="hero-desc">
+    A data-driven exploration of Pakistan's most pressing civic problems —
+    and the solutions that can transform 240 million lives.
+  </p>
+  <div class="scroll-cta">
+    <span>SCROLL</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-number" data-target="240">0</span><span class="stat-label">Million Population</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-number" data-target="39">0</span><span class="stat-label">% Below Poverty Line</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-number" data-target="9">0</span><span class="stat-label">Major Civic Issues</span>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <span class="stat-number" data-target="76">0</span><span class="stat-label">Years of Independence</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEMS SECTION -->
+<section class="section" id="problems">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">☪ Critical Issues</span>
+      <h2 class="section-title">Pakistan's <em>Major</em><br>Civic Problems</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="problems-grid" id="problemsGrid">
+
+      <!-- Card 1: Water Crisis -->
+      <div class="problem-card reveal" style="animation-delay:0.1s" data-color="#e74c3c">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(231,76,60,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#ff6b6b">💧</span>
+        <span class="problem-severity severity-critical"><i class="fas fa-circle" style="font-size:0.4rem"></i> Critical</span>
+        <h3 class="problem-title">Water Crisis & Scarcity</h3>
+        <p class="problem-desc">Pakistan faces one of the world's most severe water crises. With per capita availability dropping to alarming levels, millions lack access to clean drinking water, causing disease outbreaks and agricultural collapse.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">30M+</span><span class="mini-stat-key">Without clean water</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">1017</span><span class="mini-stat-key">m³ per capita</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">2025</span><span class="mini-stat-key">Water stress year</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Build small dams & water reservoirs in arid regions to capture monsoon rainfall</li>
+            <li><span class="sol-bullet">▶</span>Modernize canal irrigation with drip systems to reduce 40% water waste in agriculture</li>
+            <li><span class="sol-bullet">▶</span>Install water filtration plants in underserved urban and rural communities</li>
+            <li><span class="sol-bullet">▶</span>Enforce water conservation laws and meter all industrial water usage</li>
+            <li><span class="sol-bullet">▶</span>Rainwater harvesting programs for every household and school</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 2: Energy -->
+      <div class="problem-card reveal" style="animation-delay:0.2s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(230,126,34,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#ffa55e">⚡</span>
+        <span class="problem-severity severity-critical"><i class="fas fa-circle" style="font-size:0.4rem"></i> Critical</span>
+        <h3 class="problem-title">Energy Crisis & Load Shedding</h3>
+        <p class="problem-desc">Persistent electricity shortages have crippled industry and daily life. Circular debt exceeds Rs. 2.6 trillion, and millions face 8–16 hours of daily blackouts, strangling economic productivity.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">8-16h</span><span class="mini-stat-key">Daily outages</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">2.6T</span><span class="mini-stat-key">Rs circular debt</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">25%</span><span class="mini-stat-key">Line losses</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Aggressively expand solar & wind energy — Pakistan receives 300+ sunny days annually</li>
+            <li><span class="sol-bullet">▶</span>Resolve circular debt through structural reforms and privatization of DISCOs</li>
+            <li><span class="sol-bullet">▶</span>Upgrade transmission infrastructure to reduce 25% line losses</li>
+            <li><span class="sol-bullet">▶</span>Incentivize rooftop solar for homes and commercial buildings with net metering</li>
+            <li><span class="sol-bullet">▶</span>Invest in hydro potential — Pakistan has 60,000 MW untapped hydropower</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 3: Education -->
+      <div class="problem-card reveal" style="animation-delay:0.3s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(52,152,219,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#74b9ff">📚</span>
+        <span class="problem-severity severity-critical"><i class="fas fa-circle" style="font-size:0.4rem"></i> Critical</span>
+        <h3 class="problem-title">Education Crisis</h3>
+        <p class="problem-desc">22.8 million children are out of school — the world's second highest. Literacy rates remain at 58%, education spending barely reaches 2% of GDP, and curriculum quality lags decades behind global standards.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">22.8M</span><span class="mini-stat-key">Out of school</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">58%</span><span class="mini-stat-key">Literacy rate</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">2%</span><span class="mini-stat-key">GDP spending</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Increase education budget to minimum 4% of GDP as per UNESCO recommendation</li>
+            <li><span class="sol-bullet">▶</span>Introduce conditional cash transfers for low-income families to keep girls in school</li>
+            <li><span class="sol-bullet">▶</span>Modernize curriculum: integrate STEM, coding, and critical thinking from early grades</li>
+            <li><span class="sol-bullet">▶</span>Standardize national curriculum to eliminate madrassa vs public school divide</li>
+            <li><span class="sol-bullet">▶</span>Deploy e-learning platforms with offline access for rural connectivity gaps</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 4: Corruption -->
+      <div class="problem-card reveal" style="animation-delay:0.4s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(155,89,182,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#a29bfe">⚖️</span>
+        <span class="problem-severity severity-critical"><i class="fas fa-circle" style="font-size:0.4rem"></i> Critical</span>
+        <h3 class="problem-title">Corruption & Governance</h3>
+        <p class="problem-desc">Pakistan ranks 133/180 on Transparency International's Corruption Index. Billions are lost annually through kickbacks, ghost employees, and institutional nepotism, choking development at every level.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">133rd</span><span class="mini-stat-key">Corruption rank</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">$1B+</span><span class="mini-stat-key">Annual losses</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">2%</span><span class="mini-stat-key">Tax-to-GDP ratio</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Digitize all government transactions to create auditable financial trails</li>
+            <li><span class="sol-bullet">▶</span>Strengthen NAB, FIA with independent oversight free from political interference</li>
+            <li><span class="sol-bullet">▶</span>Expand tax net: only 3.2M file taxes — enforce compliance through digital identification</li>
+            <li><span class="sol-bullet">▶</span>Protect and incentivize whistleblowers with legal safeguards</li>
+            <li><span class="sol-bullet">▶</span>Publish real-time government budget spending through open data portals</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 5: Healthcare -->
+      <div class="problem-card reveal" style="animation-delay:0.5s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(0,184,148,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#00cec9">🏥</span>
+        <span class="problem-severity severity-high"><i class="fas fa-circle" style="font-size:0.4rem"></i> High</span>
+        <h3 class="problem-title">Healthcare Collapse</h3>
+        <p class="problem-desc">With only 1 doctor per 1,200 patients and 1 hospital bed per 1,600 people, Pakistan's healthcare system is overwhelmed. Preventable diseases like polio, typhoid, and dengue kill thousands annually.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">1:1200</span><span class="mini-stat-key">Doctor ratio</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">1.2%</span><span class="mini-stat-key">GDP health spend</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">66</span><span class="mini-stat-key">Life expectancy</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Expand Sehat Sahulat Card program to cover 100% of population for basic care</li>
+            <li><span class="sol-bullet">▶</span>Deploy telemedicine platforms to connect rural patients with urban specialists</li>
+            <li><span class="sol-bullet">▶</span>Build 500+ rural health centers equipped with diagnostic labs</li>
+            <li><span class="sol-bullet">▶</span>Fast-track Lady Health Worker program to address last-mile maternal care</li>
+            <li><span class="sol-bullet">▶</span>Increase health budget to 3% of GDP with anti-corruption procurement reforms</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 6: Overpopulation -->
+      <div class="problem-card reveal" style="animation-delay:0.6s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(253,121,168,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#fd79a8">👥</span>
+        <span class="problem-severity severity-high"><i class="fas fa-circle" style="font-size:0.4rem"></i> High</span>
+        <h3 class="problem-title">Overpopulation</h3>
+        <p class="problem-desc">Pakistan's population grows at 2.4% annually — among the highest globally — stretching every resource and service beyond capacity. Without intervention, population will hit 400M by 2050.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">2.4%</span><span class="mini-stat-key">Growth rate</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">3.5</span><span class="mini-stat-key">Avg fertility rate</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">400M</span><span class="mini-stat-key">By 2050</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>National family planning campaign via mosques, schools, and media with religious support</li>
+            <li><span class="sol-bullet">▶</span>Free and accessible contraception distribution at all public health facilities</li>
+            <li><span class="sol-bullet">▶</span>Educate women — evidence shows female literacy directly reduces birth rates</li>
+            <li><span class="sol-bullet">▶</span>Incentivize later marriages and smaller families through tax benefits</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 7: Air Pollution -->
+      <div class="problem-card reveal" style="animation-delay:0.7s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(108,92,231,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#a29bfe">🌫️</span>
+        <span class="problem-severity severity-high"><i class="fas fa-circle" style="font-size:0.4rem"></i> High</span>
+        <h3 class="problem-title">Air Pollution & Smog</h3>
+        <p class="problem-desc">Lahore regularly tops the world's most polluted city rankings. Crop burning, vehicular emissions, and industrial smoke create deadly smog blankets causing thousands of respiratory deaths annually.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">#1</span><span class="mini-stat-key">Most polluted city</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">1500+</span><span class="mini-stat-key">AQI peaks</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">8M</span><span class="mini-stat-key">Motorcycles emitting</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Ban agricultural crop burning — provide subsidized mechanical alternatives to farmers</li>
+            <li><span class="sol-bullet">▶</span>Mandate Euro-6 emission standards for vehicles; phase out old rickshaws and trucks</li>
+            <li><span class="sol-bullet">▶</span>Expand electric bus rapid transit in Lahore, Karachi, and Islamabad</li>
+            <li><span class="sol-bullet">▶</span>Urban forestation: plant 10 million trees in smog-prone corridors</li>
+            <li><span class="sol-bullet">▶</span>Industrial pollution controls with real-time monitoring and heavy penalties</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 8: Poverty & Unemployment -->
+      <div class="problem-card reveal" style="animation-delay:0.8s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(201,168,76,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#fdcb6e">💼</span>
+        <span class="problem-severity severity-critical"><i class="fas fa-circle" style="font-size:0.4rem"></i> Critical</span>
+        <h3 class="problem-title">Poverty & Unemployment</h3>
+        <p class="problem-desc">39% of Pakistanis live below the poverty line. Youth unemployment exceeds 10% officially — unofficially far higher. Brain drain costs the nation billions as skilled professionals seek opportunity abroad.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">39%</span><span class="mini-stat-key">Poverty rate</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">10%+</span><span class="mini-stat-key">Unemployment</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">$26B</span><span class="mini-stat-key">Remittances (relief)</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Strengthen Ehsaas/BISP programs with conditional skill-development requirements</li>
+            <li><span class="sol-bullet">▶</span>Create SEZs (Special Economic Zones) to attract FDI and generate 500,000+ jobs</li>
+            <li><span class="sol-bullet">▶</span>Formalize the informal economy: 72% of workers lack social protections</li>
+            <li><span class="sol-bullet">▶</span>IT & freelancing training for 1M youth annually — leverage Pakistan's 300,000 freelancers</li>
+            <li><span class="sol-bullet">▶</span>Microfinance expansion for women entrepreneurs in rural areas</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Card 9: Law & Order -->
+      <div class="problem-card reveal" style="animation-delay:0.9s">
+        <div class="card-glow-orb" style="background:radial-gradient(circle, rgba(192,57,43,0.3), transparent)"></div>
+        <span class="problem-icon" style="color:#ff7675">🔒</span>
+        <span class="problem-severity severity-medium"><i class="fas fa-circle" style="font-size:0.4rem"></i> Severe</span>
+        <h3 class="problem-title">Law & Order / Terrorism</h3>
+        <p class="problem-desc">Extremist violence, street crime, and a slow, overburdened judicial system undermine security. Karachi, Balochistan, and KPK face serious threats, while case backlogs exceed 2.2 million pending in courts.</p>
+        <div class="problem-stats-mini">
+          <div class="mini-stat"><span class="mini-stat-val">2.2M</span><span class="mini-stat-key">Court backlogs</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">145</span><span class="mini-stat-key">Judges per million</span></div>
+          <div class="mini-stat"><span class="mini-stat-val">10yr+</span><span class="mini-stat-key">Avg case duration</span></div>
+        </div>
+        <button class="expand-btn" onclick="toggleSolution(this)">
+          <i class="fas fa-lightbulb"></i> VIEW SOLUTIONS
+        </button>
+        <div class="solution-panel">
+          <p class="solution-title">⚡ Actionable Solutions</p>
+          <ul class="solution-list">
+            <li><span class="sol-bullet">▶</span>Digitize court case management and introduce e-filing to cut backlog by 50%</li>
+            <li><span class="sol-bullet">▶</span>Train and triple the police-to-citizen ratio from current 1:625</li>
+            <li><span class="sol-bullet">▶</span>Deradicalization programs targeting madrassas with extremist curriculum</li>
+            <li><span class="sol-bullet">▶</span>Counter-terrorism intelligence reform: unified command structure</li>
+            <li><span class="sol-bullet">▶</span>Community policing models proven effective in Lahore pilot programs</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CRISIS METER -->
+<section class="crisis-meter-section" id="crisis-meter">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <span class="section-tag">☪ Severity Index</span>
+        <h2 class="section-title">Crisis <em>Meter</em></h2>
+        <div class="section-divider"></div>
+        <p style="color:rgba(245,245,240,0.65); line-height:1.8; font-size:1rem">
+          Each issue is rated by impact severity, population affected, and urgency
+          of intervention required. The data paints a sobering picture — but also
+          shows where focused action can achieve the most dramatic results.
+        </p>
+      </div>
+      <div class="col-lg-7 reveal">
+        <div class="meter-wrap">
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">💧 Water Crisis</span><span class="meter-val" id="v1">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="92" style="background: linear-gradient(90deg, #e74c3c, #ff6b6b)"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">⚡ Energy Crisis</span><span class="meter-val" id="v2">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="88" style="background: linear-gradient(90deg, #e67e22, #ffa55e)"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">📚 Education Deficit</span><span class="meter-val" id="v3">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="82" style="background: linear-gradient(90deg, #3498db, #74b9ff)"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">⚖️ Corruption Level</span><span class="meter-val" id="v4">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="79" style="background: linear-gradient(90deg, #8e44ad, #a29bfe)"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">💼 Poverty Rate</span><span class="meter-val" id="v5">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="75" style="background: linear-gradient(90deg, #c9a84c, #fdcb6e)"></div></div>
+          </div>
+          <div class="meter-item">
+            <div class="meter-header"><span class="meter-name">🌫️ Air Pollution</span><span class="meter-val" id="v6">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="70" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div></div>
+          </div>
+          <div class="meter-item" style="margin-bottom:0">
+            <div class="meter-header"><span class="meter-name">🏥 Healthcare Gap</span><span class="meter-val" id="v7">0%</span></div>
+            <div class="meter-bar-bg"><div class="meter-bar-fill" data-val="65" style="background: linear-gradient(90deg, #00b894, #55efc4)"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-tag">☪ History of Challenges</span>
+      <h2 class="section-title">Crisis <em>Timeline</em></h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">1947 — FOUNDING</p>
+            <div class="timeline-content">
+              <h5>Partition & Nation Building</h5>
+              <p>Pakistan emerges from British India amid massive refugee displacement. Infrastructure is sparse, institutions weak, and the economy dependent on agriculture.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">1971 — DISMEMBERMENT</p>
+            <div class="timeline-content">
+              <h5>East Pakistan Becomes Bangladesh</h5>
+              <p>Civil war and military action lead to the loss of East Pakistan. Political instability deepens governance failures across all civic systems.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">1990s — ECONOMIC DECLINE</p>
+            <div class="timeline-content">
+              <h5>Recurring IMF Bailouts Begin</h5>
+              <p>Structural economic weakness, low tax revenue, and rising debt push Pakistan into recurring cycles of IMF dependency. Education and health budgets suffer most.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2000s — TERRORISM SURGE</p>
+            <div class="timeline-content">
+              <h5>Post-9/11: Security Crisis Dominates</h5>
+              <p>The war on terror spills into Pakistan. Over 80,000 lives lost to terrorism. Resources divert from development, deepening poverty and governance gaps.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2010 — MEGA FLOOD</p>
+            <div class="timeline-content">
+              <h5>Catastrophic Floods Expose Fragility</h5>
+              <p>One-fifth of Pakistan submerged. 20M displaced. Infrastructure losses exceed $10B. Climate vulnerability added to the civic crisis agenda permanently.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-year">2022–PRESENT</p>
+            <div class="timeline-content">
+              <h5>Economic Crisis & Political Turmoil</h5>
+              <p>Record inflation exceeding 35%, currency devaluation, political instability, and another catastrophic flood in 2022 compound existing challenges to breaking point.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="solutions">
+  <div class="container reveal">
+    <span class="hero-crescent" style="font-size:3rem; margin-bottom:1rem">☪</span>
+    <h2 class="section-title" style="margin-bottom:1rem">Change Starts With <em>Awareness</em></h2>
+    <p style="max-width:550px; margin:0 auto 2.5rem; color:rgba(245,245,240,0.65); line-height:1.8; font-size:1.05rem">
+      Pakistan's challenges are immense — but not insurmountable. Every informed citizen,
+      every vote for accountability, every local action builds the nation our 240 million people deserve.
+    </p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="#problems" class="cta-btn">
+        <i class="fas fa-arrow-up"></i> EXPLORE ISSUES
+      </a>
+      <a href="#crisis-meter" class="cta-btn" style="background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(1,65,28,0.3)); border: 1px solid rgba(201,168,76,0.4)">
+        <i class="fas fa-chart-bar"></i> VIEW SEVERITY
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-crescent">☪</div>
+    <p class="footer-text">PAKISTAN — CIVIC ISSUES AWARENESS PLATFORM</p>
+    <p style="color:rgba(245,245,240,0.25); font-size:0.75rem; margin-top:0.5rem; letter-spacing:1px">
+      BUILT FOR AWARENESS & CIVIC EDUCATION • DATA FROM PUBLIC SOURCES
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// STARFIELD
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 180; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.3,
+      speed: Math.random() * 0.3 + 0.05,
+      opacity: Math.random() * 0.7 + 0.2,
+      twinkle: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    s.twinkle += 0.02;
+    const op = s.opacity * (0.7 + 0.3 * Math.sin(s.twinkle));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(201,168,76,${op})`;
+    ctx.fill();
+    s.y -= s.speed;
+    if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(drawStars);
+}
+
+resizeCanvas();
+initStars();
+drawStars();
+window.addEventListener('resize', () => { resizeCanvas(); initStars(); });
+
+// CUSTOM CURSOR
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursorDot.style.left = (mouseX - 2.5) + 'px';
+  cursorDot.style.top = (mouseY - 2.5) + 'px';
+});
+
+function animateCursor() {
+  curX += (mouseX - curX) * 0.12;
+  curY += (mouseY - curY) * 0.12;
+  cursor.style.left = (curX - 9) + 'px';
+  cursor.style.top = (curY - 9) + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll('a, button, .problem-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+// NAVBAR SCROLL
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 50) $('#navbar').addClass('scrolled');
+  else $('#navbar').removeClass('scrolled');
+});
+
+// FLOATING PARTICLES
+function createParticle() {
+  const p = document.createElement('div');
+  p.className = 'floating-particle';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+  p.style.animationDelay = Math.random() * 5 + 's';
+  p.style.width = p.style.height = (Math.random() * 4 + 2) + 'px';
+  p.style.opacity = Math.random() * 0.5;
+  document.body.appendChild(p);
+  setTimeout(() => p.remove(), 25000);
+}
+setInterval(createParticle, 2000);
+
+// TOGGLE SOLUTIONS
+function toggleSolution(btn) {
+  const panel = btn.nextElementSibling;
+  const isActive = panel.classList.contains('active');
+  panel.classList.toggle('active');
+  btn.innerHTML = isActive
+    ? '<i class="fas fa-lightbulb"></i> VIEW SOLUTIONS'
+    : '<i class="fas fa-times"></i> CLOSE SOLUTIONS';
+}
+
+// COUNT UP ANIMATION
+function countUp(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  let current = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current) + (suffix || (target > 100 ? 'M' : target > 50 ? '+' : '%'));
+  }, 30);
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+
+      // Count up stats
+      if (entry.target.querySelector('[data-target]')) {
+        entry.target.querySelectorAll('[data-target]').forEach(el => countUp(el));
+      }
+      if (entry.target.hasAttribute('data-target')) countUp(entry.target);
+
+      // Animate meter bars
+      entry.target.querySelectorAll('.meter-bar-fill').forEach((bar, i) => {
+        const val = bar.getAttribute('data-val');
+        const valEl = document.getElementById('v' + (i + 1));
+        setTimeout(() => {
+          bar.style.width = val + '%';
+          if (valEl) {
+            let c = 0;
+            const t = setInterval(() => {
+              c += 2; if (c >= val) { c = val; clearInterval(t); }
+              valEl.textContent = c + '%';
+            }, 30);
+          }
+        }, i * 150);
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .timeline-item, [data-target]').forEach(el => observer.observe(el));
+
+// STATS COUNT UP on scroll
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-number[data-target]').forEach(el => countUp(el));
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stats-strip').forEach(el => statsObserver.observe(el));
+
+// METER SECTION OBSERVER
+const meterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const fills = entry.target.querySelectorAll('.meter-bar-fill');
+      fills.forEach((bar, i) => {
+        const val = bar.getAttribute('data-val');
+        const valEl = document.getElementById('v' + (i + 1));
+        setTimeout(() => {
+          bar.style.width = val + '%';
+          if (valEl) {
+            let c = 0;
+            const t = setInterval(() => {
+              c += 2; if (c >= val) { c = val; clearInterval(t); }
+              valEl.textContent = c + '%';
+            }, 30);
+          }
+        }, i * 180);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.meter-wrap').forEach(el => meterObserver.observe(el));
+
+// 3D CARD TILT ON MOUSE MOVE
+document.querySelectorAll('.problem-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rx = ((y - cy) / cy) * -8;
+    const ry = ((x - cx) / cx) * 8;
+    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-12px) scale(1.02)`;
+
+    // Move glow orb
+    const orb = card.querySelector('.card-glow-orb');
+    if (orb) {
+      orb.style.left = (x - 100) + 'px';
+      orb.style.top = (y - 100) + 'px';
+    }
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'rotateX(0) rotateY(0) translateY(0) scale(1)';
+  });
+});
+</script>
+</body>
+</html>
